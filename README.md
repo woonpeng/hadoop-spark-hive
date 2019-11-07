@@ -76,4 +76,12 @@ val sqlContext = new org.apache.spark.sql.hive.HiveContext(sc)
 sqlContext.sql("show databases").show()
 ```
 
+# To restart Jupyter service
+
+For WP:
+
+```
+winpty docker exec -it hadoop-master jupyter notebook --ip=0.0.0.0 --port=8081
+```
+
 Yay!
