@@ -2,4 +2,5 @@
 
 ./start-containers.sh
 database/setup-mysql.sh
-master/setup-s
+master/setup-ssh.sh
+$SHELL
