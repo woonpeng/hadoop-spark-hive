@@ -1,11 +1,12 @@
-PWD=`pwd`
+# Because WP uses git-bash
+PWD="/C:/Users/deads/Documents/Repos/hadoop-spark-hive"
 HOST_MASTER_HADOOP_CONF_PATH="$PWD/master/hadoop/conf"
 HOST_MASTER_SPARK_CONF_PATH="$PWD/master/spark/conf"
 CONT_MASTER_HADOOP_CONF_PATH='/usr/local/hadoop/etc/hadoop'
 HOST_HIVE_CONF_PATH="$PWD/database/hive/conf"
 DAGS_FOLDER="$PWD/dags"
 
-docker run -itd -v $HOST_MASTER_HADOOP_CONF_PATH:$CONT_MASTER_HADOOP_CONF_PATH \
+winpty docker run -itd -v $HOST_MASTER_HADOOP_CONF_PATH:$CONT_MASTER_HADOOP_CONF_PATH \
 -v $HOST_MASTER_SPARK_CONF_PATH:/usr/local/spark/conf \
 -v $DAGS_FOLDER:/usr/local/dags \
 -p 8088:8088 -p 50070:50070 -p 9001:9001 -p 50010:50010 -p 4040:4040 -p 8081:8081 \
@@ -13,17 +14,17 @@ docker run -itd -v $HOST_MASTER_HADOOP_CONF_PATH:$CONT_MASTER_HADOOP_CONF_PATH \
 --name=hadoop-master \
 hadoop-master-img
 
-docker run -itd -v $HOST_MASTER_HADOOP_CONF_PATH:$CONT_MASTER_HADOOP_CONF_PATH \
+winpty docker run -itd -v $HOST_MASTER_HADOOP_CONF_PATH:$CONT_MASTER_HADOOP_CONF_PATH \
 --network=my-bridge-network \
 --name=hadoop-slave1 \
 hadoop-slave-img
 
-docker run -itd -v $HOST_MASTER_HADOOP_CONF_PATH:$CONT_MASTER_HADOOP_CONF_PATH \
+winpty docker run -itd -v $HOST_MASTER_HADOOP_CONF_PATH:$CONT_MASTER_HADOOP_CONF_PATH \
 --network=my-bridge-network \
 --name=hadoop-slave2 \
 hadoop-slave-img
 
-docker run -itd -v $HOST_HIVE_CONF_PATH:/usr/local/hive/conf \
+winpty docker run -itd -v $HOST_HIVE_CONF_PATH:/usr/local/hive/conf \
 --network=my-bridge-network \
 -p 9083:9083 -p 10002:10002 \
 --name=hive-db \
